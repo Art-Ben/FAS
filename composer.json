@@ -1,0 +1,24 @@
+{
+    "name": "fas",
+    "type": "wordpress-theme",
+    "description": "FAS - custom theme",
+    "keywords": [
+        "WordPress",
+        "Themes",
+        "FAS"
+    ],
+    "license": "GPL-2.0-or-later",
+    "authors": "https://github.com/Art-Ben",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+
+    },
+    "scripts": {
+
+    },
+    "support": {
+
+    }
+}
