@@ -99,7 +99,7 @@ if( !function_exists('renderHeaderLangs') ) {
                 }
             }
 
-            $outputHtml.= '<span class="headerLangSwitch__flag '. $itemCurrent['classes'] .'"></span>';
+            $outputHtml.= '<div class="headerLangSwitch__flag '. $itemCurrent['classes'] .'"><span class="arrow"></span></div>';
 
             $outputHtml.= '<div class="headerLangSwitch__drop">';
 
