@@ -11,24 +11,44 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'fas' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'fas' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'fas' ), 'fas', '<a href="https://www.linkedin.com/in/%D0%B0%D1%80%D1%82%D1%91%D0%BC-%D0%B1%D0%B5%D0%BD%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9-015767108/">ArtBen777</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+        <footer class="footer">
+            <div class="footer__cont basic-container">
+                <div class="footer__column">
+                    <?= renderFooterLogo(); ?>
+                    <span class="footerSmallText">
+                        <?= get_field('footer_small', 'option'); ?>
+                    </span>
+                </div>
+                <div class="footer__column">
+                    <?= renderFooterMenu(); ?>
+                </div>
+                <div class="footer__column">
+                    <?php
+                        if ( get_field('footer_links_items', 'option') ) {
+                    ?>
+                        <div class="footerLinks">
+                            <?php
+                                foreach ( get_field('footer_links_items', 'option') as $footerLink ) {
+                                    echo '<a href="'. $footerLink['link'] .'" class="footerLinks__link">'. $footerLink['label'] .'</a>';
+                                }
+                            ?>
+                        </div>
+                    <?php
+                        }
+                    ?>
 
-<?php wp_footer(); ?>
+                    <div class="footerCopy">
+                        <span class="copyright">
+                            <?= get_field('footer_copy', 'option').' '. date('Y'); ?>
+                        </span>
 
-</body>
+                        <?= renderFooterLangs(); ?>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    <?php wp_footer(); ?>
+
+    </body>
 </html>

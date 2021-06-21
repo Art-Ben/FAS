@@ -11,12 +11,13 @@
   top: 0;
   left: 0;
   z-index: 999;
+  transition: all .6s;
 
   &__cont {
     @extend .flex;
     @extend .flex-wrap;
     @extend .flex-v-center;
-    @extend .flex-h-between;
+    @extend .flex-h-start;
   }
 
   &LogoLink {
@@ -32,6 +33,15 @@
       height: auto;
       max-width: 90px;
     }
+
+    @media screen and (max-width: 1024px){
+      order: 1;
+      margin-right: 35px;
+    }
+
+    @media screen and (max-width: 560px) {
+      margin-right: 0;
+    }
   }
 
   &Nav {
@@ -40,6 +50,7 @@
     @extend .flex-wrap;
     @extend .flex-v-center;
     @extend .flex-h-center;
+    margin: 0 auto;
 
     &__list {
       width: auto;
@@ -47,12 +58,96 @@
       @extend .flex-wrap;
       @extend .flex-v-center;
       @extend .flex-h-center;
+
+
       &--item {
         width: auto;
         @extend .flex;
         @extend .flex-wrap;
         @extend .flex-v-center;
         @extend .flex-h-center;
+        margin-right: 30px;
+        position: relative;
+
+        &.hasDropMenu {
+          cursor: pointer;
+
+          .arrow {
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid $COLOR_WHITE;
+            border-bottom: 2px solid $COLOR_WHITE;
+            border-radius: 2px;
+            transition: all .6s;
+            transform: rotate(45deg);
+            transform-origin: center;
+            margin-left: 10px;
+          }
+
+          .headerNav__link {
+            &:hover {
+              color: $COLOR_WHITE;
+            }
+          }
+
+          &.open {
+            .arrow {
+              transform: rotate(225deg);
+            }
+          }
+        }
+
+        .dropMenu {
+          min-width: 180px;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          opacity: 0;
+          display: none;
+          padding: 10px 0;
+          border-radius: 5px;
+          background: $COLOR_WHITE;
+          @extend .flex-wrap;
+          @extend .flex-c-start;
+          @extend .flex-v-start;
+          @extend .flex-h-start;
+          @extend .flex-direction-column;
+          z-index: 1;
+
+          &__link {
+            @include font('Space Grotesk', 12px, $COLOR_BLUE, 400, 16px);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: all .6s;
+            position: relative;
+            padding-left: 8px;
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 3px;
+              height: 100%;
+              display: block;
+              background: linear-gradient(260deg, #2550E5, #2533B0);
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            &:hover {
+              opacity: .5;
+            }
+          }
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
       }
     }
 
@@ -62,6 +157,17 @@
       @extend .flex-wrap;
       @extend .flex-v-center;
       @extend .flex-h-center;
+      @include font('Space Grotesk', 14px, $COLOR_WHITE, 600, 22px);
+      text-decoration: none;
+      transition: all .6s;
+
+      &:hover {
+        color: transparentize( $COLOR_WHITE, .5 );
+      }
+    }
+
+    @media screen and (max-width: 1024px){
+      display: none;
     }
   }
 
@@ -71,6 +177,34 @@
     @extend .flex-wrap;
     @extend .flex-v-center;
     @extend .flex-h-center;
+    position: relative;
+
+    &__cont {
+      width: auto;
+      @extend .flex;
+      @extend .flex-wrap;
+      @extend .flex-v-center;
+      @extend .flex-h-center;
+      cursor: pointer;
+
+      &.open {
+        .arrow {
+          transform: rotate(225deg);
+        }
+      }
+    }
+
+    .arrow {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid $COLOR_WHITE;
+      border-bottom: 2px solid $COLOR_WHITE;
+      border-radius: 1px;
+      margin-left: 10px;
+      transform: rotate( 45deg );
+      transition: all .6s;
+      transform-origin: center;
+    }
 
     &__flag {
       width: auto;
@@ -104,12 +238,269 @@
 
     &__drop {
       width: auto;
-      display: none;
       opacity: 0;
+      display: none;
+      @extend .flex-wrap;
+      @extend .flex-v-start;
+      @extend .flex-h-start;
+      @extend .flex-direction-column;
+      position: absolute;
+      bottom: calc( -200% - 5px);
+      left: -2px;
+      width: 34px;
+      border-radius: 3px;
+      background: $COLOR_WHITE;
+      padding: 2px;
+
+      .headerLangSwitch__flag {
+        margin-bottom: 5px;
+        border: 1px solid $COLOR_BLUE;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1024px){
+      order: 1;
+    }
+
+    @media screen and (max-width: 560px) {
+      order: 3;
+    }
+  }
+
+  &LoginBtn {
+    width: auto;
+    padding: 12.5px 25px;
+    border-radius: 3px;
+    background: transparent;
+    @include font('Space Grotesk', 16px, $COLOR_WHITE, 600, 24px);
+    transition: all .6s;
+    text-decoration: none;
+
+    &:hover {
+      color: transparentize($COLOR_WHITE, .5);
+    }
+
+    @media screen and (max-width: 1024px){
+      order: 3;
+    }
+
+    @media screen and (max-width: 560px) {
+      display: none;
+    }
+  }
+
+  &AccBtn {
+    width: auto;
+    padding: 12.5px 25px;
+    border-radius: 3px;
+    background: $COLOR_BLUE;
+    @include font('Space Grotesk', 16px, $COLOR_WHITE, 600, 24px);
+    transition: all .6s;
+    text-decoration: none;
+
+    &:hover {
+      color: $COLOR_BLUE;
+      background: $COLOR_WHITE;
+    }
+
+    @media screen and (max-width: 1024px){
+      order: 3;
+    }
+
+    @media screen and (max-width: 560px) {
+      display: none;
+    }
+  }
+
+  .btnAddMenuToggle {
+    display: none;
+    width: 35px;
+    height: 40px;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+    border-radius: 3px;
+    border: none;
+    background-color: $COLOR_BLUE;
+    background-position: center;
+    background-image: url('../dist/images/iconUser.svg');
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    margin-left: 10px;
+
+    @media screen and (max-width: 560px) {
+      display: flex;
+      order: 3;
+    }
+  }
+
+  .btnMenuToggle {
+    width: 35px;
+    height: 15px;
+    display: none;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+    outline: none;
+    background: transparent;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    margin: 0 auto;
+
+    .line {
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      top:0;
+      background: $COLOR_WHITE;
+      transition: all .6s;
+      transform-origin: center center;
+
+      &:nth-child(2) {
+        top: calc(50% - 1px);
+      }
+
+      &:last-child {
+        top: 100%;
+      }
+    }
+
+    &.open {
+      .line {
+        top: calc(50% - 1px);
+        transform: rotate(45deg);
+
+        &:nth-child(2) {
+          opacity: 0;
+        }
+
+        &:last-child {
+          top: calc(50% - 1px);
+          transform: rotate(-45deg);
+        }
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      display: flex;
+      order: 2;
+    }
+  }
+
+  &__mobileMenu {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    padding: 25px 40px;
+    display: none;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-center;
+    box-shadow: 0px 14px 4px rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid transparentize($COLOR_WHITE, .8);
+
+    @media screen and (min-width: 1025px){
+      display: none!important;
+    }
+
+    @media screen and (max-width: 1024px){
+      .headerNav {
+        display: flex;
+      }
+    }
+
+    @media screen and (max-width: 560px){
+      padding: 0;
+      background: linear-gradient(260deg, #2550E5, #2533B0);
+      border-top: 1px solid transparentize($COLOR_WHITE, .8);
+
+      .headerNav__list--item {
+        width: 100%;
+        padding: 15px 10px;
+        margin-right: 0;
+        border-bottom: 1px solid transparentize($COLOR_WHITE, .8);
+        justify-content: flex-start;
+
+        .dropMenu {
+          left: 10px;
+          transform: unset;
+        }
+      }
+    }
+  }
+
+  &__mobileBtns {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    display: none;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+
+    .headerLoginBtn, .headerAccBtn {
+      width: 100%;
+      idth: 100%;
+      padding: 15px 10px;
+      margin-right: 0;
+      border-bottom: 1px solid transparentize($COLOR_WHITE, .8);
       @extend .flex;
       @extend .flex-wrap;
-      @extend .flex-v-center;
-      @extend .flex-h-center;
+      @extend .flex-v-start;
+      @extend .flex-h-start;
+      background: linear-gradient(260deg, #2550E5, #2533B0);
+      position: relative;
+      border-radius: 0;
+
+      &:after {
+        display: block;
+        content: '';
+        width: 15px;
+        height: 15px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+    }
+
+    .headerLoginBtn {
+      &:after {
+        background-image: url('../dist/images/iconLogin.svg');
+      }
+
+    }
+
+    .headerAccBtn {
+      &:after {
+        background-image: url('../dist/images/iconUser.svg');
+      }
+    }
+
+  }
+
+  &.fixed {
+    background: linear-gradient(260deg, #2550E5, #2533B0);
+    border-bottom-color: transparent;
+
+    @media screen and (max-width: 1024px) {
+      border-bottom-color: transparentize($COLOR_WHITE, .8);
+    }
+
+    .header__mobileMenu {
+      background: linear-gradient(260deg, #2550E5, #2533B0);
+      border-top: 1px solid transparentize($COLOR_WHITE, .8);
     }
   }
 }

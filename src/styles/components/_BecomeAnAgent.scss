@@ -1,0 +1,79 @@
+.pageBecomeAnAgent {
+  width: 100%;
+  @extend .flex;
+  @extend .flex-wrap;
+  @extend .flex-v-start;
+  @extend .flex-h-start;
+
+  &__cont {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+  }
+
+  &_sect1 {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-center;
+    position: relative;
+    z-index: 2;
+    padding: 50px 0 100px 0;
+
+    &--items {
+      width: 100%;
+      @extend .flex;
+      @extend .flex-wrap;
+      @extend .flex-v-stretch;
+      @extend .flex-h-center;
+      margin-top: 50px;
+
+      .item {
+        width: 100%;
+        max-width: 300px;
+        margin-right: 90px;
+        border-radius: 10px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-start;
+        @extend .flex-c-start;
+        @extend .flex-h-center;
+        padding: 30px 40px;
+
+        .icon {
+          width: 100%;
+          @extend .flex;
+          @extend .flex-wrap;
+          @extend .flex-v-start;
+          @extend .flex-h-center;
+          margin-bottom: 30px;
+
+          img {
+            width: 100%;
+            max-width: 65px;
+          }
+        }
+
+        .title {
+          width: 100%;
+          display: block;
+          text-align: center;
+          @include font('Space Grotesk', 16px, $COLOR_BLACK, 700, 24px);
+        }
+
+        .content {
+          width: 100%;
+          text-align: center;
+          @include font('Space Grotesk', 16px, $COLOR_BLACK, 400, 24px);
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

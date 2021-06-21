@@ -287,4 +287,377 @@ jQuery(document).ready(function () {
         });
     }
     /*-- END --*/
+
+    /*-- Header when scroll --*/
+    if( $(window).scrollTop() > $('.header').innerHeight() ) {
+        $('.header').addClass('fixed');
+    } else {
+        $('.header').removeClass('fixed');
+    }
+
+    $(window).scroll( function() {
+        if( $(window).scrollTop() > $('.header').innerHeight() ) {
+            $('.header').addClass('fixed');
+        } else {
+            $('.header').removeClass('fixed');
+        }
+    } );
+    /*-- END --*/
+
+    /*-- Header drop menus --*/
+    $('.headerNav__list--item.hasDropMenu').click( function() {
+        var allDropMenus = $('.headerNav__list--item.hasDropMenu.open .dropMenu');
+        var thisDropMenu = $(this).find('.dropMenu');
+        var top;
+
+        if( $(window).innerWidth() < 560 ) {
+            top = 'calc(100% - 10px)';
+        } else {
+            top = '110%';
+        }
+
+        if( !$(this).hasClass('open') ) {
+            $('.headerNav__list--item.hasDropMenu').removeClass('open');
+
+            $(this).addClass('open');
+
+            gsap.fromTo( allDropMenus,
+                {
+                    opacity: 1,
+                    top: top,
+                    display: 'flex'
+                },
+                {
+                    opacity: 0,
+                    top: '0',
+                    display: 'none',
+                    duration: 0.6
+                }
+            );
+
+
+            gsap.fromTo( thisDropMenu,
+                {
+                    opacity: 0,
+                    top: '0',
+                    display: 'none'
+                },
+                {
+                    opacity: 1,
+                    top: top,
+                    display: 'flex',
+                    duration: 0.6,
+                    delay: 0.3
+                }
+            );
+        } else {
+            $(this).removeClass('open');
+
+            gsap.fromTo( thisDropMenu,
+                {
+                    opacity: 1,
+                    top: top,
+                    display: 'flex',
+                },
+                {
+                    opacity: 0,
+                    top: '0',
+                    display: 'none',
+                    duration: 0.6
+                }
+            );
+        }
+    } );
+
+    $('.footerNav__list--item.hasDropMenu').click( function() {
+        var allDropMenus = $('.footerNav__list--item.hasDropMenu.open .dropMenu');
+        var thisDropMenu = $(this).find('.dropMenu');
+
+        if( !$(this).hasClass('open') ) {
+
+            $('.footerNav__list--item.hasDropMenu').removeClass('open');
+
+            $(this).addClass('open');
+
+            gsap.fromTo( allDropMenus,
+                {
+                    opacity: 1,
+                    top: 'calc(110% - 15px)',
+                    display: 'flex'
+                },
+                {
+                    opacity: 0,
+                    top: '0',
+                    display: 'none',
+                    duration: 0.6
+                }
+            );
+
+
+            gsap.fromTo( thisDropMenu,
+                {
+                    opacity: 0,
+                    top: '0',
+                    display: 'none'
+                },
+                {
+                    opacity: 1,
+                    top: 'calc(110% - 15px)',
+                    display: 'flex',
+                    duration: 0.6,
+                    delay: 0.3
+                }
+            );
+        } else {
+            $(this).removeClass('open');
+
+            gsap.fromTo( thisDropMenu,
+                {
+                    opacity: 1,
+                    top: 'calc(110% - 15px)',
+                    display: 'flex',
+                },
+                {
+                    opacity: 0,
+                    top: '0',
+                    display: 'none',
+                    duration: 0.6
+                }
+            );
+        }
+    } )
+    /*-- END --*/
+
+    /*-- lang switch --*/
+    $('.headerLangSwitch__cont').click( function() {
+        var dropMenu = $(this).siblings('.headerLangSwitch__drop');
+
+        if( !$(this).hasClass('open') ) {
+            $(this).addClass('open');
+
+            gsap.fromTo(dropMenu,
+                {
+                    opacity: 0,
+                    bottom: 0,
+                    display: 'none'
+                },
+                {
+                    opacity: 1,
+                    bottom: 'calc(-200% - 10px)',
+                    display: 'flex',
+                    duration: .6,
+                }
+            );
+        } else {
+            $(this).removeClass('open');
+
+            gsap.fromTo(dropMenu,
+                {
+                    opacity: 1,
+                    bottom: 'calc(-200% - 10px)',
+                    display: 'flex'
+                },
+                {
+                    opacity: 0,
+                    bottom: 0,
+                    display: 'none',
+                    duration: .6,
+                }
+            );
+
+        }
+    } );
+
+    $('.footerLangSwitch__cont').click( function() {
+        var dropMenu = $(this).siblings('.footerLangSwitch__drop');
+
+        if( !$(this).hasClass('open') ) {
+            $(this).addClass('open');
+
+            gsap.fromTo(dropMenu,
+                {
+                    opacity: 0,
+                    bottom: 0,
+                    display: 'none'
+                },
+                {
+                    opacity: 1,
+                    bottom: 'calc(-200% - 10px)',
+                    display: 'flex',
+                    duration: .6,
+                }
+            );
+        } else {
+            $(this).removeClass('open');
+
+            gsap.fromTo(dropMenu,
+                {
+                    opacity: 1,
+                    bottom: 'calc(-200% - 10px)',
+                    display: 'flex'
+                },
+                {
+                    opacity: 0,
+                    bottom: 0,
+                    display: 'none',
+                    duration: .6,
+                }
+            );
+
+        }
+    } );
+    /*-- END --*/
+
+    /*-- Header mobile nav --*/
+    $('.btnMenuToggle').click( function() {
+        var mobileMenu = $('.header__mobileMenu');
+        var allDropMenus = $('.headerNav__list--item.hasDropMenu.open .dropMenu');
+        var addHeaderMenu = $('.header__mobileBtns');
+
+        if( !$(this).hasClass('open') ) {
+            $(this).addClass('open');
+
+            gsap.fromTo(mobileMenu ,
+                {
+                    opacity: 0,
+                    top: 0,
+                    display: 'none'
+                },
+                {
+                    opacity: 1,
+                    top: '100%',
+                    display: 'flex',
+                    duration: .6,
+                }
+            );
+
+            if( $('.btnAddMenuToggle').hasClass('open') ) {
+                $('.btnAddMenuToggle').removeClass('open');
+
+                gsap.fromTo( addHeaderMenu,
+                    {
+                        opacity: 1,
+                        top: '100%',
+                        display: 'flex',
+                        duration: 0.6
+                    },
+                    {
+                        opacity: 0,
+                        top: '0',
+                        display: 'none',
+                        duration: 0.6
+                    }
+                );
+            }
+
+        } else {
+            $(this).removeClass('open');
+            $('.headerNav__list--item.hasDropMenu').removeClass('open');
+            gsap.fromTo( allDropMenus,
+                {
+                    opacity: 1,
+                    top: 'calc(110% - 15px)',
+                    display: 'flex'
+                },
+                {
+                    opacity: 0,
+                    top: '0',
+                    display: 'none',
+                    duration: 0.6
+                }
+            );
+
+            gsap.fromTo(mobileMenu ,
+                {
+                    opacity: 1,
+                    top: '100%',
+                    display: 'flex',
+
+                },
+                {
+                    opacity: 0,
+                    top: 0,
+                    display: 'none',
+                    duration: .6,
+                }
+            );
+        }
+    } );
+    /*-- END --*/
+
+    /*-- Header mobile acc / login btn --*/
+    $('.btnAddMenuToggle').click( function() {
+        var mobileMenu = $('.header__mobileMenu');
+        var allDropMenus = $('.headerNav__list--item.hasDropMenu.open .dropMenu');
+        var addHeaderMenu = $('.header__mobileBtns');
+
+        if( !$(this).hasClass('open') ) {
+            $(this).addClass('open');
+
+            if( $('.btnMenuToggle').hasClass('open') ) {
+                $('.btnMenuToggle').removeClass('open');
+
+                gsap.fromTo( allDropMenus,
+                    {
+                        opacity: 1,
+                        top: 'calc(110% - 15px)',
+                        display: 'flex'
+                    },
+                    {
+                        opacity: 0,
+                        top: '0',
+                        display: 'none',
+                        duration: 0.6
+                    }
+                );
+
+                gsap.fromTo(mobileMenu ,
+                    {
+                        opacity: 1,
+                        top: '100%',
+                        display: 'flex',
+
+                    },
+                    {
+                        opacity: 0,
+                        top: 0,
+                        display: 'none',
+                        duration: .6,
+                    }
+                );
+            }
+
+            gsap.fromTo( addHeaderMenu,
+                {
+                    opacity: 0,
+                    top: '0',
+                    display: 'none',
+                },
+                {
+                    opacity: 1,
+                    top: '100%',
+                    display: 'flex',
+                    duration: 0.6
+                }
+            );
+        } else {
+            $(this).removeClass('open');
+
+            gsap.fromTo( addHeaderMenu,
+                {
+                    opacity: 1,
+                    top: '100%',
+                    display: 'flex',
+                    duration: 0.6
+                },
+                {
+                    opacity: 0,
+                    top: '0',
+                    display: 'none',
+                    duration: 0.6
+                }
+            );
+        }
+    } );
+    /*-- END --*/
 });

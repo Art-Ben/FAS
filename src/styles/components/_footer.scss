@@ -1,3 +1,346 @@
 .footer {
+  width: 100%;
+  padding: 50px 0;
+  @extend .flex;
+  @extend .flex-wrap;
+  @extend .flex-v-start;
+  @extend .flex-h-center;
+  background-image: url('../dist/images/footerBg.png');
+  background-position: right center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
 
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: linear-gradient(260deg, #2550E5, #2533B0);
+    position: absolute;
+  }
+
+  &__cont {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+  }
+
+  &__column {
+    width: 33.33333333%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+
+    @media screen and (max-width: 560px) {
+      &:first-child {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+      width: 50%;
+    }
+  }
+
+  &LogoLink {
+    width: 100%;
+    margin-bottom: 15px;
+
+    img {
+      max-width: 90px;
+    }
+  }
+
+  &SmallText {
+    width: 100%;
+    max-width: 200px;
+    @include font('Space Grotesk', 16px, transparentize($COLOR_WHITE, .4), 600, 24px);
+  }
+
+  &Links {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+    @extend .flex-direction-column;
+    margin-bottom: 30px;
+
+    &__link {
+      text-decoration: none;
+      @include font('Space Grotesk', 16px, transparentize($COLOR_WHITE, .4), 600, 24px);
+      margin-bottom: 15px;
+      transition: all .6s;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:hover {
+        opacity: .3;
+      }
+
+      &:visited {
+        color: $COLOR_WHITE;
+      }
+    }
+  }
+
+  &Copy {
+    width: 100%;
+    padding-top: 15px;
+    border-top: 1px solid transparentize($COLOR_WHITE, .4);
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+
+    .copyright {
+      width: auto;
+      @include font('Space Grotesk', 16px, transparentize($COLOR_WHITE, .4), 600, 24px);
+    }
+  }
+
+  &LangSwitch {
+    width: auto;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-center;
+    @extend .flex-h-center;
+    position: relative;
+    margin-left: auto;
+
+    &__cont {
+      width: auto;
+      @extend .flex;
+      @extend .flex-wrap;
+      @extend .flex-v-center;
+      @extend .flex-h-center;
+      cursor: pointer;
+
+      &.open {
+        .arrow {
+          transform: rotate(225deg);
+        }
+      }
+    }
+
+    .arrow {
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid $COLOR_WHITE;
+      border-bottom: 2px solid $COLOR_WHITE;
+      border-radius: 1px;
+      margin-left: 10px;
+      transform: rotate( 45deg );
+      transition: all .6s;
+      transform-origin: center;
+    }
+
+    &__flag {
+      width: auto;
+      @extend .flex;
+      @extend .flex-wrap;
+      @extend .flex-v-center;
+      @extend .flex-h-center;
+      width: 30px;
+      height: 18px;
+      border-radius: 2px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+
+      &.current {
+        cursor: default;
+      }
+
+      &.cs {
+        background-image: url('../dist/images/flag-czech.svg');
+      }
+
+      &.ru {
+        background-image: url('../dist/images/flag-russia.svg');
+      }
+
+      &.en {
+        background-image: url('../dist/images/flag-usa.svg');
+      }
+    }
+
+    &__drop {
+      width: auto;
+      opacity: 0;
+      display: none;
+      @extend .flex-wrap;
+      @extend .flex-v-start;
+      @extend .flex-h-start;
+      @extend .flex-direction-column;
+      position: absolute;
+      bottom: calc( -200% - 5px);
+      left: -2px;
+      width: 34px;
+      border-radius: 3px;
+      background: $COLOR_WHITE;
+      padding: 2px;
+
+      .headerLangSwitch__flag {
+        margin-bottom: 5px;
+        border: 1px solid $COLOR_BLUE;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    @media screen and (max-width: 560px) {
+      width: 100%;
+      justify-content: flex-start;
+      margin-top: 15px;
+    }
+  }
+
+  &Nav {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+
+    &__list {
+      width: 100%;
+      @extend .flex;
+      @extend .flex-wrap;
+      @extend .flex-v-start;
+      @extend .flex-h-start;
+      @extend .flex-direction-column;
+      padding-right: 50px;
+
+      &--item {
+        width: 100%;
+        max-width: 265px;
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-start;
+        position: relative;
+        margin-bottom: 15px;
+
+        &.hasDropMenu {
+          cursor: pointer;
+
+          &:nth-child(2) {
+            padding-bottom: 15px;
+            margin-bottom: 0;
+            border-top: 1px solid transparentize($COLOR_WHITE, .4);
+            padding-top: 15px;
+          }
+
+          &:nth-child(3) {
+            padding-bottom: 15px;
+            border-bottom: 1px solid transparentize($COLOR_WHITE, .4);
+          }
+
+          .arrow {
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid $COLOR_WHITE;
+            border-bottom: 2px solid $COLOR_WHITE;
+            border-radius: 2px;
+            transition: all .6s;
+            transform: rotate(45deg);
+            transform-origin: center;
+            margin-left: 10px;
+          }
+
+          .footerNav__link {
+            &:hover {
+              color: $COLOR_WHITE;
+            }
+          }
+
+          &.open {
+            .arrow {
+              transform: rotate(225deg);
+            }
+          }
+        }
+
+        .dropMenu {
+          min-width: 180px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+          display: none;
+          padding: 10px 0;
+          border-radius: 5px;
+          background: $COLOR_WHITE;
+          @extend .flex-wrap;
+          @extend .flex-c-start;
+          @extend .flex-v-start;
+          @extend .flex-h-start;
+          @extend .flex-direction-column;
+          z-index: 1;
+
+          &__link {
+            @include font('Space Grotesk', 12px, $COLOR_BLUE, 400, 16px);
+            text-decoration: none;
+            transition: all .6s;
+            position: relative;
+            padding-left: 8px;
+            margin-bottom: 0;
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 3px;
+              height: 100%;
+              display: block;
+              background: linear-gradient(260deg, #2550E5, #2533B0);
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            &:hover {
+              opacity: .5;
+            }
+          }
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &__link {
+      width: auto;
+      @extend .flex;
+      @extend .flex-wrap;
+      @extend .flex-v-center;
+      @extend .flex-h-center;
+      @include font('Space Grotesk', 14px, transparentize($COLOR_WHITE, .4), 600, 22px);
+      text-decoration: none;
+      transition: all .6s;
+
+      &:hover {
+        color: $COLOR_WHITE;
+      }
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    background-image: url('../dist/images/footerBg_mobile.png');
+  }
 }

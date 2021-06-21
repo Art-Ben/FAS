@@ -23,6 +23,7 @@ body {
   overflow-x: hidden;
   line-height: 16px;
   font-size: 16px;
+  background: #F4F6FD;
 }
 
 *, *:before, *:after{
@@ -144,33 +145,65 @@ input, textarea {
 
 .basic-container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1110px;
+
+  @media screen and (max-width: 1100px) {
+    padding: 0 40px;
+  }
+
+  @media screen and (max-width: 560px) {
+    padding: 0 15px;
+  }
+
+  &.over-hidd {
+    overflow: hidden;
+  }
+
+  @media screen and (max-width: 1024px){
+    &.over-hidd_tabl {
+      overflow: hidden;
+    }
+  }
+
 }
 
 .pageTitle {
   width: 100%;
-  min-height: 540px;
-  padding-top: 200px;
   @extend .flex;
   @extend .flex-wrap;
   @extend .flex-v-start;
   @extend .flex-h-center;
   background: linear-gradient(260deg, #2550E5, #2533B0);
   border-radius: 0 0 110px 110px;
+  position: relative;
+  overflow: hidden;
 
   &__cont {
     @extend .flex;
     @extend .flex-wrap;
     @extend .flex-v-start;
+    @extend .flex-c-start;
     @extend .flex-h-start;
+    position: relative;
+    padding-top: 200px;
+    min-height: 540px;
+
+    @media screen and (max-width: 1024px) {
+      padding-top: 165px;
+    }
+
+    @media screen and (max-width: 560px) {
+      padding-top: 135px;
+    }
   }
 
   &__content {
-    width: 100%;
+    width: 50%;
     @extend .flex;
     @extend .flex-wrap;
     @extend .flex-v-start;
     @extend .flex-h-start;
+    @include font('Space Grotesk', 18px, $COLOR_WHITE, 500, 26px);
 
     h2,h3,h4,h5,h6 {
       display: none;
@@ -193,16 +226,146 @@ input, textarea {
       }
     }
 
-    ul {
+    ul, ol {
+      width: 100%;
+      position: relative;
       li {
+        width: 100%;
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 25px;
 
+        &:before {
+          content: '';
+          width: 15px;
+          height: 15px;
+          border-radius: 1px;
+          display: block;
+          background: transparentize(#EFF2FC, .7);
+          position: absolute;
+          left: 0;
+          top: 5px;
+        }
+
+        &:after {
+          content: '';
+          width: 7px;
+          height: 7px;
+          border-radius: 1px;
+          display: block;
+          background: $COLOR_WHITE;
+          position: absolute;
+          left: 4px;
+          top: 9px;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
+    }
+
+    @media screen and (max-width: 1024px ) {
+      width: 100%;
+      z-index: 2;
+    }
+
+    &--line {
+      width: 100%;
+      @extend .flex;
+      @extend .flex-wrap;
+      @extend .flex-v-start;
+      @extend .flex-h-start;
+      @include font('Space Grotesk', 18px, $COLOR_WHITE, 500, 26px);
+
+      h2,h3,h4,h5,h6 {
+        display: none;
+      }
+
+      b, strong {
+        font-weight: 700;
+      }
+
+      i, em {
+        font-style: italic;
+      }
+
+      p {
+        width: 100%;
+        margin-bottom: 15px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      ul, ol {
+        width: 100%;
+        position: relative;
+        li {
+          width: 100%;
+          position: relative;
+          padding-left: 25px;
+          margin-bottom: 25px;
+
+          &:before {
+            content: '';
+            width: 15px;
+            height: 15px;
+            border-radius: 1px;
+            display: block;
+            background: transparentize(#EFF2FC, .7);
+            position: absolute;
+            left: 0;
+            top: 5px;
+          }
+
+          &:after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 1px;
+            display: block;
+            background: $COLOR_WHITE;
+            position: absolute;
+            left: 4px;
+            top: 9px;
+          }
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &__planet {
+    position: absolute;
+    width: 50%;
+    right: 0;
+    height: 100%;
+    top: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    @media screen and (max-width: 1024px ) {
+      width: 65%;
+      z-index: 1;
     }
   }
 
   &__title {
     @include font('Space Grotesk', 48px, $COLOR_WHITE, 700, 56px);
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+
+    @media screen and (max-width: 1024px) {
+      font-size: 36px;
+      line-height: 44px;
+    }
   }
 
   &__btn {
@@ -221,8 +384,163 @@ input, textarea {
 
   }
 
+  &_specialbtn {
+    width: auto;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+    padding: 12px 25px;
+    border-radius: 3px;
+    background: $COLOR_WHITE;
+    box-shadow: 0px 0px 14px transparentize($COLOR_WHITE, .75);
+    @include font('Space Grotesk', 16px, $COLOR_BLUE, 700, 24px);
+    transition: all .6s;
+    border: 1px solid $COLOR_WHITE;
+    position: absolute;
+    right: 0;
+    bottom: 90px;
+    z-index: 5;
+    text-decoration: none;
+    outline: none;
+
+    &:visited {
+      color: $COLOR_BLUE;
+    }
+
+    &:hover {
+      color: $COLOR_WHITE;
+      background: $COLOR_BLUE;
+    }
+
+    @media screen and (max-width: 1100px) {
+      right: 40px;
+    }
+
+    @media screen and (max-width: 560px) {
+      position: relative;
+      bottom: unset;
+      right: unset;
+      margin-top: 30px;
+    }
+  }
+
   &.huge {
-    min-height: 700px;
+    .pageTitle__cont {
+      min-height: 700px;
+    }
+
+    .pageTitle__title {
+      margin-bottom: 50px;
+    }
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 0;
+    height: 100%;
+    background-size: auto 100%;
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-image: url('../dist/images/PlanetSpace.png');
+  }
+
+  &.frontPage {
+    .pageTitle__planet {
+      img {
+        margin-top: 100px;
+      }
+    }
+  }
+
+  &.pageOnlineMoneyTransfer {
+    .pageTitle__planet {
+      img {
+        width: auto;
+        position: absolute;
+        bottom: 0;
+        right: calc(100% - 53vw);
+        max-height: calc(100% - 120px);
+
+        @media screen and (max-width: 1024px) {
+          right: -265px;
+        }
+
+        @media screen and (max-width: 560px) {
+
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    border-radius: 0 0 80px 80px;
+  }
+
+  @media screen and (max-width: 560px) {
+    border-radius: 0;
+  }
+}
+
+.cstTitle {
+  width: 100%;
+  text-align: center;
+  @include font('Space Grotesk', 36px, $COLOR_BLACK, 600, 44px);
+  margin-bottom: 15px;
+
+  &_blue {
+    color: $COLOR_BLUE;
+  }
+
+  @media screen and (max-width: 1024px) {
+    font-size: 30px;
+    line-height: 38px;
+  }
+}
+
+.cstDesc {
+  width: 100%;
+  text-align: center;
+  @include font('Space Grotesk', 18px, $COLOR_BLACK, 600, 26px);
+
+  &_grey {
+    color: transparentize( $COLOR_BLACK, .6 );
+  }
+
+  @media screen and (max-width: 1024px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.cstBtn {
+  width: auto;
+  padding: 12.5px 25px;
+  border-radius: 3px;
+  background: $COLOR_BLACK;
+  @include font('Space Grotesk', 16px, $COLOR_WHITE, 600, 24px);
+  text-decoration: none;
+  border: none;
+  outline: none;
+  transition: all .6s;
+
+  &:hover {
+    background: $COLOR_WHITE;
+    color: $COLOR_BLACK;
+  }
+
+  &_blue {
+    background: $COLOR_BLUE;
+
+    &:hover {
+      background: $COLOR_WHITE;
+      color: $COLOR_BLUE;
+    }
   }
 }
 

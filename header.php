@@ -20,7 +20,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( get_field('page_css_classes') ); ?>>
     <?php wp_body_open(); ?>
     <header class="header">
         <div class="header__cont basic-container">
@@ -29,11 +29,27 @@
 
                 echo renderHeaderMenu();
 
+                echo renderHeaderMenuBtn();
+
                 echo renderHeaderLangs();
+
+                echo renderHeaderMobileBtnToggler();
 
                 echo renderHeaderLogin();
 
                 echo renderHeaderBtn();
+            ?>
+        </div>
+
+        <div class="header__mobileMenu">
+            <?php
+                echo renderHeaderMenu();
+            ?>
+        </div>
+
+        <div class="header__mobileBtns">
+            <?php
+                echo renderHeaderMobileBtns();
             ?>
         </div>
     </header>
