@@ -14,6 +14,25 @@
     @extend .flex-h-start;
   }
 
+  &__group {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+    margin-bottom: 75px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--title {
+      width: 100%;
+      @include font('Space Grotesk', 36px, $COLOR_BLUE, 600, 44px);
+      margin-bottom: 25px;
+    }
+  }
+
   .pageSepa_sectTable--btnLine {
     width: 100%;
     margin-bottom: 35px;

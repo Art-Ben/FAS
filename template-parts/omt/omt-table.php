@@ -103,7 +103,7 @@ if ( $table_onmt ) {
             <?php
             if ( $sect_table_btn ) {
                 echo '<div class="pageSepa_sectTable--btnLine">';
-                echo '<a class="lnk" href="'. $sect_table_btn['lnk'] .'">'. $sect_table_btn['btn'] .'</a>';
+                echo '<a class="lnk" target="_blank" href="'. $sect_table_btn['lnk'] .'">'. $sect_table_btn['btn'] .'</a>';
                 echo '</div>';
             }
             ?>

@@ -463,8 +463,10 @@ input, textarea {
 
   &.frontPage {
     .pageTitle__planet {
+      text-align: right;
       img {
-        margin-top: 25px;
+        margin-top: 45px;
+        max-width: 500px;
 
         @media screen and (max-width: 560px) {
           opacity: .7;
@@ -475,6 +477,7 @@ input, textarea {
 
   &.pageBusinessTitle {
     .pageTitle__planet {
+      text-align: right;
       img {
         margin-top: 100px;
 
@@ -488,8 +491,8 @@ input, textarea {
   &.pageBusinessTitle {
     .pageTitle__planet {
       img {
-        margin-top: 55px;
-        min-width: 600px;
+        margin-top: 45px;
+        max-width: 500px;
       }
     }
   }
@@ -647,6 +650,27 @@ input, textarea {
         max-width: 300px;
       }
     }
+  }
+
+  &.pageDocsTitle {
+    .pageTitle__cont {
+      position: relative;
+      z-index: 3;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-size: auto 85%;
+      background-position: bottom right;
+      background-image: url(../dist/images/blogBg.svg);
+      background-repeat: no-repeat;
+      border-radius: 0 0 110px 110px;
+      z-index: 2;
+    }
+
   }
 
   @media screen and (max-width: 1024px) {
