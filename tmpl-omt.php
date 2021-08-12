@@ -12,6 +12,8 @@ get_template_part('template-parts/omt/section1');
 
 get_template_part('template-parts/omt/section2');
 
+get_template_part('template-parts/omt/omt-table');
+
 get_template_part('template-parts/omt/section3');
 
 get_footer();

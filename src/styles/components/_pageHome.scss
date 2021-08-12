@@ -5,6 +5,18 @@
     @extend .flex-v-start;
     @extend .flex-h-start;
 
+    .pageTitle.frontPage {
+        .pageTitle__title {
+            font-size: 44px;
+            line-height: 48px;
+            margin-bottom: 25px;
+        }
+
+        .pageTitle__btn {
+            margin-top: 25px;
+        }
+    }
+
     &__cont {
         width: 100%;
         @extend .flex;
@@ -21,7 +33,7 @@
         @extend .flex-h-center;
         position: relative;
         z-index: 2;
-        margin-top: -75px;
+        margin-top: -35px;
         margin-bottom: 50px;
 
         &--card {
@@ -530,6 +542,7 @@
             @extend .flex-v-start;
             @extend .flex-h-center;
             margin-top: 50px;
+            padding-left: 100px;
 
             .item {
                 width: 100%;

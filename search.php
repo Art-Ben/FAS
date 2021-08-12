@@ -6,48 +6,58 @@
  *
  * @package FAS
  */
+switch ( pll_current_language() ) {
+    case 'ru':
+        $searchTitle = 'Результатыт поиска для: ';
 
+        break;
+
+    case 'en':
+        $searchTitle = 'Search results for: ';
+
+        break;
+
+    case 'cs':
+        $searchTitle = 'Výsledky hledání pro: ';
+        break;
+}
 get_header();
 ?>
+    <section class="pageBlog">
+        <div class="pageBlog__header">
+            <div class="pageBlog__cont basic-container">
+                <div class="pageBlog__info">
+                    <h1 class="pageBlog__info--title">
+                        <?= $searchTitle; ?> <span style="color:#2550E5;font-weight: 700; padding: 5px 25px; background: #fff; border-radius: 10px"> <?= get_search_query(); ?> </span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <?php if ( have_posts() ) { ?>
+        <div class="pageBlog__posts">
+            <div class="basic-container">
+                <div class="pageBlog__posts--items" style="margin: 50px 0;">
+                <?php
+                    /* Start the Loop */
+                    while ( have_posts() ) {
 
-	<main id="primary" class="site-main">
 
-		<?php if ( have_posts() ) : ?>
+                        the_post();
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'fas' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
+                        get_template_part('template-parts/blog/blog-small');
+                    }
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
+                    echo renderPostsPagination();
+                ?>
+                </div>
+            </div>
+        </div>
+        <?php
+            } else {
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-	</main><!-- #main -->
-
+            echo '<div class="pageBlog__empty">'. get_field('empty_blog', 'options') .'</div>';
+        }
+        ?>
+    </section>
 <?php
-get_sidebar();
 get_footer();

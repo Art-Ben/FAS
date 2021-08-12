@@ -1,0 +1,63 @@
+.pageDocs {
+  width: 100%;
+  @extend .flex;
+  @extend .flex-wrap;
+  @extend .flex-v-start;
+  @extend .flex-h-center;
+  padding: 50px 0 100px 0;
+
+  &__cont {
+    width: 100%;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+  }
+
+  .pageSepa_sectTable--btnLine {
+    width: 100%;
+    margin-bottom: 35px;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-start;
+    margin-top: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .lnk {
+    font-size: 20px;
+    line-height: 26px;
+    padding: 12px 25px;
+    @extend .flex;
+    @extend .flex-wrap;
+    @extend .flex-v-start;
+    @extend .flex-h-center;
+    @extend .flex-direction-column;
+    text-align: left;
+    justify-content: flex-start!important;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      left: 25px;
+      top: calc(50% - 7.5px);
+    }
+
+    .name {
+      width: calc(100% - 30px);
+      margin-left: 30px;
+    }
+
+    .infoLine {
+      width: calc(100% - 30px);
+      margin-left: 30px;
+      font-size: 14px;
+      line-height: 22px;
+      color: #757575;
+    }
+  }
+}

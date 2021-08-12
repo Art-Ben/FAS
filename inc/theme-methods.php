@@ -17,7 +17,7 @@ if( !function_exists('renderHeaderLogo') ) {
     function renderHeaderLogo() {
         $outputHtml = '';
         $headerLogo = get_field('headerLogo', 'option');
-        $headerLogoLink = is_front_page() ? 'javascript:void();' : get_home_url();
+        $headerLogoLink = is_front_page() ? 'javascript:void();' : get_home_url('/');
 
         $outputHtml.= '<a href="'. $headerLogoLink .'" class="headerLogoLink"><img class="headerLogoImg" src="'. $headerLogo .'" alt="FAS"></a>';
 
@@ -142,7 +142,7 @@ if( !function_exists('renderHeaderLangs') ) {
     function renderHeaderLangs() {
         $currentPageID = get_the_ID();
         $currentLang = pll_current_language();
-        $langCodes = array('en', 'cs', 'ru');
+        $langCodes = array('en' => 'English', 'cs' => 'Čeština');//array('en', 'cs', 'ru');
         $itemCurrent = array();
         $items = array();
         $currentPostTranslate = '';
@@ -151,30 +151,31 @@ if( !function_exists('renderHeaderLangs') ) {
 
         $outputHtml = '<div class="headerLangSwitch">';
 
-            foreach ( $langCodes as $lang ) {
+            foreach ( $langCodes as $langCode => $langName ) {
 
-                if( $lang == $currentLang ) {
-                    $itemClasses = 'current'.' '. $lang;
+                if( $langCode == $currentLang ) {
+                    $itemClasses = 'current'.' '. $langCode;
 
                     $itemCurrent = array(
                         'classes' => $itemClasses,
                     );
 
                 } else {
-                    $currentPostTranslate = pll_get_post( $currentPageID, $lang );
+                    $currentPostTranslate = pll_get_post( $currentPageID, $langCode );
 
                     if( $currentPostTranslate ) {
                         $itemLink = get_the_permalink( $currentPostTranslate );
-                        $itemClasses = $lang;
+                        $itemClasses = $langCode;
 
                     } else {
                         $itemLink ='javascript:void(0);';
-                        $itemClasses = 'disable '.$lang;
+                        $itemClasses = 'disable '.$langCode;
                     }
 
                     $item = array(
                         'classes' => $itemClasses,
                         'link' => $itemLink,
+                        'name' => $langName
                     );
 
                     array_push( $items,  $item);
@@ -186,7 +187,7 @@ if( !function_exists('renderHeaderLangs') ) {
             $outputHtml.= '<div class="headerLangSwitch__drop">';
 
                 foreach ( $items as $langItem ) {
-                    $outputHtml.= '<a href="'. $langItem['link']  .'" class="headerLangSwitch__flag '. $langItem['classes'] .'"></a>';
+                    $outputHtml.= '<a class="headerLangSwitch__flag--cont" href="'. $langItem['link']  .'"><span class="headerLangSwitch__flag '. $langItem['classes'] .'"></span>'. $langItem['name'] .'</a>';
                 }
 
             $outputHtml.= '</div>';
@@ -201,7 +202,7 @@ if( !function_exists('renderFooterLangs') ) {
     function renderFooterLangs() {
         $currentPageID = get_the_ID();
         $currentLang = pll_current_language();
-        $langCodes = array('en', 'cs', 'ru');
+        $langCodes = array('en' => 'English', 'cs' => 'Čeština');//array('en', 'cs', 'ru');
         $itemCurrent = array();
         $items = array();
         $currentPostTranslate = '';
@@ -210,30 +211,30 @@ if( !function_exists('renderFooterLangs') ) {
 
         $outputHtml = '<div class="footerLangSwitch">';
 
-        foreach ( $langCodes as $lang ) {
+        foreach ( $langCodes as $langCode => $langName ) {
 
-            if( $lang == $currentLang ) {
-                $itemClasses = 'current'.' '. $lang;
+            if( $langCode == $currentLang ) {
+                $itemClasses = 'current'.' '. $langCode;
 
                 $itemCurrent = array(
                     'classes' => $itemClasses,
                 );
 
             } else {
-                $currentPostTranslate = pll_get_post( $currentPageID, $lang );
+                $currentPostTranslate = pll_get_post( $currentPageID, $langCode );
 
                 if( $currentPostTranslate ) {
                     $itemLink = get_the_permalink( $currentPostTranslate );
-                    $itemClasses = $lang;
-
+                    $itemClasses = $langCode;
                 } else {
                     $itemLink ='javascript:void(0);';
-                    $itemClasses = 'disable '.$lang;
+                    $itemClasses = 'disable '.$langCode;
                 }
 
                 $item = array(
                     'classes' => $itemClasses,
                     'link' => $itemLink,
+                    'name' => $langName
                 );
 
                 array_push( $items,  $item);
@@ -245,7 +246,7 @@ if( !function_exists('renderFooterLangs') ) {
         $outputHtml.= '<div class="footerLangSwitch__drop">';
 
         foreach ( $items as $langItem ) {
-            $outputHtml.= '<a href="'. $langItem['link']  .'" class="footerLangSwitch__flag '. $langItem['classes'] .'"></a>';
+            $outputHtml.= '<a class="footerLangSwitch__flag--cont" href="'. $langItem['link']  .'"><span class="footerLangSwitch__flag '. $langItem['classes'] .'"></span>'. $langItem['name'] .'</a>';
         }
 
         $outputHtml.= '</div>';
@@ -288,6 +289,47 @@ if( !function_exists('renderHeaderMobileBtns') ) {
 
         $outputHtml.= renderHeaderLogin();
         $outputHtml.= renderHeaderBtn();
+
+        return $outputHtml;
+    }
+}
+
+if( !function_exists('renderPostsPagination') ) {
+    function renderPostsPagination( $custom_query = null, $sortArgs = null ) {
+        global  $wp_query;
+        $big = 999999999;
+        $outputHtml = '';
+        $paginationArgs = array(
+            'base'    => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+            'current' => max( 1, get_query_var('paged') ),
+            'show_all' => true,
+            'prev_next' => false,
+            'type' => 'array',
+            'before_page_number' => '',
+            'after_page_number' => ''
+        );
+
+        if ( $custom_query ) {
+            $paginationArgs['total'] = $custom_query->max_num_pages;
+        } else {
+            $paginationArgs['total'] = $wp_query->max_num_pages;
+        }
+
+        if ( $sortArgs  ) {
+            $paginationArgs['add_args'] = $sortArgs;
+        }
+
+        $pagination = paginate_links( $paginationArgs );
+
+        if ( !is_null( $pagination ) ) {
+            $outputHtml.= '<div class="pageBlog__pagination">';
+            foreach ( $pagination as $pagItem ) {
+                $outputHtml.= '<div class="pagItem">';
+                $outputHtml.= $pagItem;
+                $outputHtml.= '</div>';
+            }
+            $outputHtml.= '</div>';
+        }
 
         return $outputHtml;
     }

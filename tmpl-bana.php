@@ -16,6 +16,6 @@ get_template_part('template-parts/bana/section3');
 
 get_template_part('template-parts/bana/section4');
 
-get_template_part('template-parts/bana/section5');
+get_template_part('template-parts/bana/cta');
 
 get_footer();

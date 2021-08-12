@@ -25,8 +25,14 @@ $special_btn_type = get_field('pageSpecialBtn_type');
                         break;
 
                         case 'btn':
-                            $lnk = $field['button_link'] ? $field['button_link'] : 'javascript:void(0)';
-                            echo '<a href="'. $lnk .'" class="pageTitle__btn">'. $field['button_text'] .'</a>';
+
+                            if ( $field['button_type'] == 'scroll' ) {
+                                echo '<a href="javascript:void(0)" class="pageTitle__btn scrollToNextSection">'. $field['button_text'] .'</a>';
+                            } else {
+                                $lnk = $field['button_link'] ? $field['button_link'] : 'javascript:void(0)';
+                                echo '<a href="'. $lnk .'" class="pageTitle__btn">'. $field['button_text'] .'</a>';
+                            }
+
                         break;
                     }
                 }

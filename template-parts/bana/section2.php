@@ -11,13 +11,13 @@ $content = get_field('sect2_content');
                 <?= $title; ?>
             </h2>
             <span class="pageBecomeAnAgent__smalltitle">
-                <div class="pageBecomeAnAgent__content">
-                    <?= $smalltitle; ?>
-                </div>
+                <?= $smalltitle; ?>
             </span>
         </div>
         <div class="column">
-            <?= $content; ?>
+            <div class="pageBecomeAnAgent__content">
+                <?= $content; ?>
+            </div>
         </div>
     </div>
 </section>

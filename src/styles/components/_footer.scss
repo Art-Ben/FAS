@@ -154,6 +154,7 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
+      margin-right: 15px;
 
       &.current {
         cursor: default;
@@ -170,25 +171,42 @@
       &.en {
         background-image: url('../dist/images/flag-usa.svg');
       }
+
+      &--cont {
+        width: 100%;
+        @include font('Space Grotesk', 16px, $COLOR_BLACK, 500, 24px);
+        @extend .flex;
+        @extend .flex-wrap;
+        @extend .flex-v-center;
+        @extend .flex-h-start;
+        text-decoration: none;
+
+
+        &:visited {
+          color: $COLOR_BLACK;
+        }
+      }
     }
 
     &__drop {
-      width: auto;
+      min-width: 230px;
+      position: absolute;
+      left: -25px;
+      padding: 25px;
+      top: 0;
       opacity: 0;
       display: none;
+      border-radius: 12px;
+      background: $COLOR_WHITE;
       @extend .flex-wrap;
+      @extend .flex-c-start;
       @extend .flex-v-start;
       @extend .flex-h-start;
       @extend .flex-direction-column;
-      position: absolute;
-      bottom: calc( -200% - 5px);
-      left: -2px;
-      width: 34px;
-      border-radius: 3px;
-      background: $COLOR_WHITE;
-      padding: 2px;
+      z-index: 1;
+      width: auto;
 
-      .headerLangSwitch__flag {
+      .footerLangSwitch__flag {
         margin-bottom: 5px;
         border: 1px solid $COLOR_BLUE;
 
@@ -273,14 +291,14 @@
         }
 
         .dropMenu {
-          min-width: 180px;
+          min-width: 230px;
           position: absolute;
           top: 0;
-          left: 0;
+          left: -25px;
+          padding: 25px;
           opacity: 0;
           display: none;
-          padding: 10px 0;
-          border-radius: 5px;
+          border-radius: 12px;
           background: $COLOR_WHITE;
           @extend .flex-wrap;
           @extend .flex-c-start;
@@ -290,14 +308,20 @@
           z-index: 1;
 
           &__link {
-            @include font('Space Grotesk', 12px, $COLOR_BLUE, 400, 16px);
+            width: 100%;
+            @extend .flex-wrap;
+            @extend .flex-v-start;
+            @extend .flex-h-start;
+            @include font('Space Grotesk', 14px, $COLOR_BLACK, 500, 24px);
             text-decoration: none;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
             transition: all .6s;
             position: relative;
-            padding-left: 8px;
-            margin-bottom: 0;
+            border-bottom: 1px solid #E4E4E4;
+            //padding-left: 8px;
 
-            &:before {
+            /*&:before {
               content: '';
               position: absolute;
               left: 0;
@@ -306,10 +330,12 @@
               height: 100%;
               display: block;
               background: linear-gradient(260deg, #2550E5, #2533B0);
-            }
+            }*/
 
             &:last-child {
               margin-bottom: 0;
+              padding-bottom: 0;
+              border-bottom: none;
             }
 
             &:hover {
